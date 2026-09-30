@@ -694,6 +694,11 @@ tbody tr:last-child td { border-bottom: none; }
   .form-row-3, .form-row-4 { grid-template-columns: 1fr 1fr; }
   .login-box { width: 100%; max-width: 360px; margin: 16px; padding: 28px 22px; }
 }
+
+.pc-filter-row { display:flex; gap:8px; width:100%; }
+.pc-filter-select { flex:1 1 0; min-width:0; background:#1b1917; color:#fff; border:1px solid rgba(201,168,118,.45); border-radius:10px; padding:10px 12px; font-size:.84rem; outline:none; }
+.pc-filter-select:focus { border-color:#c9a876; }
+@media (max-width:480px){ .pc-filter-row{gap:5px}.pc-filter-select{padding:9px 5px;font-size:.68rem} }
 </style>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8EZcfAAAB/lBMVEXbXpzal5vbocXfbSbZ4tbPb3zqkCLnn1b003Xz2IXl1rb8/Pvayqjv5coWFRXo3cEJCQrd0bEpKCbgza3Vw5358tmwppA3NTFYVU9uZ1d5dnBLSEaQhnNqaWhMRTqYlpDu6+PFt5qmm4djW04nIxvHu6aEemm3trHY1tCJiYhDOzLKycWoqKciHBi6spbu4b2jl3x6clybknqMxWuX2IccHSJJuC+CdF2UvGgeISAhHSBbW2LMaKrkxZR/gIKH03elwXeg146w2qfVQ4rYcq/Km67alcrCrpXbpazkoJXwtyoeIRw9PUI+QT0/QUA3tRA8uiZYUT5zFpV9foFrxVN7wWKTOLC0OZmsvH25xIyy56bRH4zYN4/aUzDZWGnQe4vTfMXZjMfZp9PqiBznmrLpqmrgo6zxwiv1ynRdYWBTvUFUwT1ZwENiX2B+gHlwvl2YRZufS62Af4OfoaO8Tp6yTqK1Uqqrpn2+wb+/wsDNADDVAlzRJVrZLInQN13QRzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD3VSiQAAAAgHRSTlP//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////xUHpOoAABdJSURBVHjaxZ0Fg+M4loAzs3QnS7LMlpnCUNQ0tDi4zMx8zAz71+9JhjiJ7TiV7jnNVOJK4virx5Il9US5uhGiItzVkErI1d8+uershKgaHm6aSpL/J0Ci4rFNJR83YNItOUO001elJMnHCEg0/Jj2KMbLAcmi8+oGMuQjgmcD9eo6edWAB8LTWr+gpklIZOw/pGlXiPEyQHKitbIhJA/RaTOO+C5GnFyIBz6wd4MGoeHRau4W4wkhxuRVABKM2x5aCUg834AAd3Z2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"/>
 <style>
@@ -1284,7 +1289,7 @@ body.wholesale-mode #wholesale-catalog {
   </header>
   <div class="pc-hero">
     <h1>Nuestra Colección de Fragancias</h1>
-    <p>Perfumes originales, decants y ofertas — consulta disponibilidad y compra en tienda</p>
+    <p>En este catálogo hemos reunido una selección única de fragancias. Cada una está diseñada para despertar emociones, revivir recuerdos inolvidables y acompañarte en cada momento especial de tu vida.</p>
   </div>
   <div class="pc-search-bar">
     <div class="search-wrap">
@@ -1320,7 +1325,7 @@ body.wholesale-mode #wholesale-catalog {
   </header>
   <div class="pc-hero">
     <h1>Nuestra Colección de Fragancias</h1>
-    <p>Perfumes originales, decants y ofertas — consulta disponibilidad y compra en tienda</p>
+    <p>En este catálogo hemos reunido una selección única de fragancias. Cada una está diseñada para despertar emociones, revivir recuerdos inolvidables y acompañarte en cada momento especial de tu vida.</p>
   </div>
   <div class="pc-search-bar">
     <div class="search-wrap">
@@ -7606,6 +7611,8 @@ const PublicCatalog = {
   allProducts: [],
   cart: [],
   filtroCategoria: 'todos',
+  filtroGenero: 'todos',
+  filtroTipo: 'todos',
   filtroDestacado: 'todos',
   filtroFamilia: 'todos',
   whatsappNumber: '18496539085',
@@ -7655,7 +7662,11 @@ const PublicCatalog = {
         unidad: p.unidad || p.presentacion || p.presentacion_producto || '',
         presentacion: p.presentacion || p.presentacion_producto || p.unidad || '',
         genero: p.genero || p.genero_nombre || '',
-        tipoProducto: p.tipoproducto,
+        tipoProducto: p.tipoproducto || p.tipo_producto || '',
+        tipoCatalogo: p.tipo_catalogo ?? p.tipocatalogo ?? p.tipoproducto ?? p.tipo_producto ?? '',
+        esDestacado: p.esdestacado ?? p.es_destacado ?? p.destacado,
+        esNuevo: !!p.esnuevo,
+        esMasVendido: !!p.esmasvendido,
         concentracion: p.concentracion,
         familiaOlfativa: p.familia_olfativa ?? p.familiaolfativa,
         ventas: Number(p.ventas || 0),
@@ -7779,57 +7790,20 @@ const PublicCatalog = {
   },
 
   renderFilters() {
-    const tipos = [
-      ['todos', 'Todos'],
-      ['Hombre', 'Hombre'],
-      ['Mujer', 'Mujer'],
-      ['Unisex', 'Unisex'],
-      ['__disenador__', 'Diseñador'],
-      ['Inspiración', 'Inspiración'],
-      ['Tester', 'Tester'],
-      ['Decant', 'Decant'],
-      ['Nicho', 'Nicho']
-    ];
-    const dest = [
-      ['todos', 'Todos'],
-      ['mas_vendidos', '🏆 Más vendidos'],
-      ['nuevos', '✨ Nuevos'],
-      ['ofertas', '🔥 Ofertas']
-    ];
-
-    // Obtener familias olfativas únicas presentes en el catálogo
-    const familiasSet = new Set();
-    for (const p of PublicCatalog.allProducts) {
-      const fList = PublicCatalog.familias(p.familiaOlfativa);
-      fList.forEach(f => { if (f) familiasSet.add(f); });
-    }
-    const familiasArr = Array.from(familiasSet).sort();
-
-    U.id('pc-filters').innerHTML = `
-      <div class="pc-filter-group pc-filter-main">
-        <div class="pc-filter-label">Género y Tipo</div>
-        <div class="pc-filter-row">
-          ${tipos.map(([k, l]) => `<button type="button" class="pc-filter-pill${PublicCatalog.filtroCategoria === k ? ' active' : ''}" onclick="PublicCatalog.setCategoria('${k}')">${l}</button>`).join('')}
-        </div>
-      </div>
-      <div class="pc-filter-group pc-filter-featured">
-        <div class="pc-filter-label">Destacados</div>
-        <div class="pc-filter-row">
-          ${dest.map(([k, l]) => `<button type="button" class="pc-feature-chip${PublicCatalog.filtroDestacado === k ? ' active' : ''}" onclick="PublicCatalog.setDestacado('${k}')">${l}</button>`).join('')}
-        </div>
-      </div>
-      ${familiasArr.length ? `
-      <div class="pc-filter-group" style="margin-top:8px">
-        <div class="pc-filter-label">Familia Olfativa</div>
-        <div class="pc-filter-row">
-          <button type="button" class="pc-filter-pill${PublicCatalog.filtroFamilia === 'todos' ? ' active' : ''}" onclick="PublicCatalog.setFamilia('todos')">Todas las familias</button>
-          ${familiasArr.map(f => `<button type="button" class="pc-filter-pill${PublicCatalog.filtroFamilia === f ? ' active' : ''}" onclick="PublicCatalog.setFamilia('${U.esc(f)}')">${U.esc(f)}</button>`).join('')}
-        </div>
-      </div>` : ''}
-    `;
+    const gender = [['todos','Todos'],['Hombre','Hombre'],['Mujer','Mujer'],['Unisex','Unisex']];
+    const types = [['todos','Todos'],['Nicho','Nicho'],['Diseñador','Diseñador'],['Árabe','Árabe']];
+    const featured = [['todos','Todos'],['ofertas','Ofertas'],['nuevos','Nuevos'],['mas_vendidos','Más vendidos']];
+    const root = U.id('pc-filters');
+    if (!root) return;
+    root.innerHTML = `<div class="pc-filter-row">
+      <select class="pc-filter-select" aria-label="Género" onchange="PublicCatalog.setCategoria(this.value)">${gender.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroGenero===k?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="pc-filter-select" aria-label="Tipo" onchange="PublicCatalog.setTipo(this.value)">${types.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroTipo===k?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="pc-filter-select" aria-label="Destacados" onchange="PublicCatalog.setDestacado(this.value)">${featured.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroDestacado===k?'selected':''}>${l}</option>`).join('')}</select>
+    </div>`;
   },
 
-  setCategoria(key) { PublicCatalog.filtroCategoria = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
+  setCategoria(key) { PublicCatalog.filtroGenero = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
+  setTipo(key) { PublicCatalog.filtroTipo = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
   setDestacado(key) { PublicCatalog.filtroDestacado = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
   setFamilia(key) { PublicCatalog.filtroFamilia = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
 
@@ -7837,14 +7811,10 @@ const PublicCatalog = {
     const q = (U.id('pc-search')?.value || '').toLowerCase().trim();
     let productos = [...PublicCatalog.allProducts];
     if (q) productos = productos.filter(p => U.matchProducto(p, q));
-    const c = PublicCatalog.filtroCategoria;
-    if (c === 'Hombre' || c === 'Mujer' || c === 'Unisex') productos = productos.filter(p => p.genero === c);
-    else if (c === '__disenador__') productos = productos.filter(p => p.tipoProducto === 'Diseñador' || p.tipoProducto === 'Original');
-    else if (['Inspiración','Tester','Decant','Nicho'].includes(c)) productos = productos.filter(p => p.tipoProducto === c);
-    
-    if (PublicCatalog.filtroFamilia && PublicCatalog.filtroFamilia !== 'todos') {
-      productos = productos.filter(p => PublicCatalog.familias(p.familiaOlfativa).includes(PublicCatalog.filtroFamilia));
-    }
+    const g = PublicCatalog.filtroGenero;
+    if (g !== 'todos') productos = productos.filter(p => p.genero === g);
+    const t = PublicCatalog.filtroTipo;
+    if (t !== 'todos') productos = productos.filter(p => (p.tipoCatalogo || p.tipo_catalogo || (p.tipoProducto === 'Original' ? 'Diseñador' : p.tipoProducto)) === t);
 
     const d = PublicCatalog.filtroDestacado;
     if (d === 'ofertas') productos = productos.filter(p => p.precioPromocional && Number(p.precioPromocional) > 0 && Number(p.precioPromocional) < Number(p.precio));
@@ -7934,6 +7904,8 @@ const WholesaleCatalog = {
   allProducts: [],
   cart: [],
   filtroCategoria: 'todos',
+  filtroGenero: 'todos',
+  filtroTipo: 'todos',
   filtroDestacado: 'todos',
   filtroFamilia: 'todos',
   token: null,
@@ -8133,6 +8105,10 @@ const WholesaleCatalog = {
           presentacion: p.presentacion || p.presentacion_producto || p.unidad || pub.presentacion || pub.presentacion_producto || pub.unidad || '',
           genero: p.genero || p.genero_nombre || pub.genero || pub.genero_nombre || '',
           tipoProducto: p.tipoproducto || p.tipo_producto || pub.tipoproducto || pub.tipo_producto || '',
+          tipoCatalogo: p.tipo_catalogo ?? p.tipocatalogo ?? (p.tipoproducto === 'Original' ? 'Diseñador' : p.tipoproducto),
+          esDestacado: p.esdestacado ?? p.es_destacado ?? p.destacado,
+          esNuevo: !!p.esnuevo,
+          esMasVendido: !!p.esmasvendido,
           concentracion: p.concentracion || p.concentracion_nombre || pub.concentracion || pub.concentracion_nombre || '',
           familiaOlfativa: p.familia_olfativa ?? p.familiaolfativa ?? pub.familia_olfativa ?? pub.familiaolfativa,
           descripcion: p.descripcion || p.descripcion_producto || p.description || pub.descripcion || pub.descripcion_producto || pub.description || '',
@@ -8281,56 +8257,20 @@ const WholesaleCatalog = {
   },
 
   renderFilters() {
-    const tipos = [
-      ['todos', 'Todos'],
-      ['Hombre', 'Hombre'],
-      ['Mujer', 'Mujer'],
-      ['Unisex', 'Unisex'],
-      ['__disenador__', 'Diseñador'],
-      ['Inspiración', 'Inspiración'],
-      ['Tester', 'Tester'],
-      ['Decant', 'Decant'],
-      ['Nicho', 'Nicho']
-    ];
-    const dest = [
-      ['todos', 'Todos'],
-      ['mas_vendidos', '🏆 Más vendidos'],
-      ['nuevos', '✨ Nuevos'],
-      ['ofertas', '🔥 Ofertas']
-    ];
-
-    const familiasSet = new Set();
-    for (const p of WholesaleCatalog.allProducts) {
-      const fList = WholesaleCatalog.familias(p.familiaOlfativa);
-      fList.forEach(f => { if (f) familiasSet.add(f); });
-    }
-    const familiasArr = Array.from(familiasSet).sort();
-
-    U.id('wm-filters').innerHTML = `
-      <div class="pc-filter-group pc-filter-main">
-        <div class="pc-filter-label">Género y Tipo</div>
-        <div class="pc-filter-row">
-          ${tipos.map(([k, l]) => `<button type="button" class="pc-filter-pill${WholesaleCatalog.filtroCategoria === k ? ' active' : ''}" onclick="WholesaleCatalog.setCategoria('${k}')">${l}</button>`).join('')}
-        </div>
-      </div>
-      <div class="pc-filter-group pc-filter-featured">
-        <div class="pc-filter-label">Destacados</div>
-        <div class="pc-filter-row">
-          ${dest.map(([k, l]) => `<button type="button" class="pc-feature-chip${WholesaleCatalog.filtroDestacado === k ? ' active' : ''}" onclick="WholesaleCatalog.setDestacado('${k}')">${l}</button>`).join('')}
-        </div>
-      </div>
-      ${familiasArr.length ? `
-      <div class="pc-filter-group" style="margin-top:8px">
-        <div class="pc-filter-label">Familia Olfativa</div>
-        <div class="pc-filter-row">
-          <button type="button" class="pc-filter-pill${WholesaleCatalog.filtroFamilia === 'todos' ? ' active' : ''}" onclick="WholesaleCatalog.setFamilia('todos')">Todas las familias</button>
-          ${familiasArr.map(f => `<button type="button" class="pc-filter-pill${WholesaleCatalog.filtroFamilia === f ? ' active' : ''}" onclick="WholesaleCatalog.setFamilia('${U.esc(f)}')">${U.esc(f)}</button>`).join('')}
-        </div>
-      </div>` : ''}
-    `;
+    const gender = [['todos','Todos'],['Hombre','Hombre'],['Mujer','Mujer'],['Unisex','Unisex']];
+    const types = [['todos','Todos'],['Nicho','Nicho'],['Diseñador','Diseñador'],['Árabe','Árabe']];
+    const featured = [['todos','Todos'],['ofertas','Ofertas'],['nuevos','Nuevos'],['mas_vendidos','Más vendidos']];
+    const root = U.id('wm-filters');
+    if (!root) return;
+    root.innerHTML = `<div class="pc-filter-row">
+      <select class="pc-filter-select" aria-label="Género" onchange="WholesaleCatalog.setCategoria(this.value)">${gender.map(([k,l])=>`<option value="${k}" ${WholesaleCatalog.filtroGenero===k?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="pc-filter-select" aria-label="Tipo" onchange="WholesaleCatalog.setTipo(this.value)">${types.map(([k,l])=>`<option value="${k}" ${WholesaleCatalog.filtroTipo===k?'selected':''}>${l}</option>`).join('')}</select>
+      <select class="pc-filter-select" aria-label="Destacados" onchange="WholesaleCatalog.setDestacado(this.value)">${featured.map(([k,l])=>`<option value="${k}" ${WholesaleCatalog.filtroDestacado===k?'selected':''}>${l}</option>`).join('')}</select>
+    </div>`;
   },
 
-  setCategoria(key) { WholesaleCatalog.filtroCategoria = key; WholesaleCatalog.renderFilters(); WholesaleCatalog.filterChange(); },
+  setCategoria(key) { WholesaleCatalog.filtroGenero = key; WholesaleCatalog.renderFilters(); WholesaleCatalog.filterChange(); },
+  setTipo(key) { WholesaleCatalog.filtroTipo = key; WholesaleCatalog.renderFilters(); WholesaleCatalog.filterChange(); },
   setDestacado(key) { WholesaleCatalog.filtroDestacado = key; WholesaleCatalog.renderFilters(); WholesaleCatalog.filterChange(); },
   setFamilia(key) { WholesaleCatalog.filtroFamilia = key; WholesaleCatalog.renderFilters(); WholesaleCatalog.filterChange(); },
 
@@ -8338,19 +8278,15 @@ const WholesaleCatalog = {
     const q = (U.id('wm-search')?.value || '').toLowerCase().trim();
     let productos = [...WholesaleCatalog.allProducts];
     if (q) productos = productos.filter(p => U.matchProducto(p, q));
-    const c = WholesaleCatalog.filtroCategoria;
-    if (c === 'Hombre' || c === 'Mujer' || c === 'Unisex') productos = productos.filter(p => p.genero === c);
-    else if (c === '__disenador__') productos = productos.filter(p => p.tipoProducto === 'Diseñador' || p.tipoProducto === 'Original');
-    else if (['Inspiración','Tester','Decant','Nicho'].includes(c)) productos = productos.filter(p => p.tipoProducto === c);
-
-    if (WholesaleCatalog.filtroFamilia && WholesaleCatalog.filtroFamilia !== 'todos') {
-      productos = productos.filter(p => WholesaleCatalog.familias(p.familiaOlfativa).includes(WholesaleCatalog.filtroFamilia));
-    }
+    const g = WholesaleCatalog.filtroGenero;
+    if (g !== 'todos') productos = productos.filter(p => p.genero === g);
+    const t = WholesaleCatalog.filtroTipo;
+    if (t !== 'todos') productos = productos.filter(p => (p.tipoCatalogo || p.tipo_catalogo || (p.tipoProducto === 'Original' ? 'Diseñador' : p.tipoProducto)) === t);
 
     const d = WholesaleCatalog.filtroDestacado;
-    if (d === 'ofertas') productos = productos.filter(p => p.precioPromocional && Number(p.precioPromocional) > 0 && Number(p.precioPromocional) < Number(p.precioMayorista));
-    else if (d === 'nuevos') productos = [...productos].sort((a, b) => new Date(b.creado) - new Date(a.creado)).slice(0, 15);
-    else if (d === 'mas_vendidos') productos = [...productos].sort((a, b) => Number(b.ventas || 0) - Number(a.ventas || 0)).slice(0, 15);
+    if (d === 'ofertas') productos = productos.filter(p => p.esOferta === true || (p.precioPromocional && Number(p.precioPromocional) > 0));
+    else if (d === 'nuevos') productos = productos.filter(p => p.esNuevo === true);
+    else if (d === 'mas_vendidos') productos = productos.filter(p => p.esMasVendido === true);
     WholesaleCatalog.renderGrid(productos);
   }, 200),
 
@@ -8430,6 +8366,117 @@ const WholesaleCatalog = {
 
 /* ─── BOOT ─── */
 document.addEventListener('DOMContentLoaded', () => App.init());
+
+/* ─── J&M AROMAS — FILTROS AUTOMÁTICOS DE CATÁLOGO ─── */
+(function(){
+  const normalizeBool = v => {
+    if (typeof v === 'string') return ['true','1','si','sí','yes'].includes(v.trim().toLowerCase());
+    return !!v;
+  };
+  const oferta = p => {
+    const normal = Number(p?.precio ?? p?.precioMayorista ?? 0);
+    const promo = Number(p?.precioPromocional ?? 0);
+    return promo > 0 && normal > 0 && promo < normal;
+  };
+  const esNuevoAutomatico = p => {
+    if (normalizeBool(p?.esNuevo ?? p?.esnuevo)) return true;
+    const fecha = p?.creado;
+    if (!fecha) return false;
+    const t = new Date(fecha).getTime();
+    return Number.isFinite(t) && (Date.now() - t) <= 30 * 86400000;
+  };
+  const getSales = p => Number(p?.ventas ?? p?.cantidadVendida ?? 0) || 0;
+
+  async function cargarMasVendidos(C){
+    try {
+      const { data, error } = await DB.client
+        .from('productos_mas_vendidos_publico')
+        .select('id,ventas')
+        .order('ventas', { ascending:false });
+      if (error) throw error;
+      const rows = (data || []).map(x => ({id:String(x.id), ventas:Number(x.ventas||0)})).filter(x => x.ventas > 0);
+      const fallback = [...(C.allProducts||[])]
+        .map(p => ({id:String(p.id), ventas:getSales(p)}))
+        .filter(x => x.ventas > 0)
+        .sort((a,b)=>b.ventas-a.ventas);
+      const ranking = rows.length ? rows : fallback;
+      // Automático: se consideran "Más vendidos" los 5 primeros productos con ventas.
+      // No se escribe ningún flag en productos ni se requiere marcar nada manualmente.
+      const top = ranking.slice(0, Math.min(5, ranking.length));
+      C._masVendidosIds = new Set(top.map(x => x.id));
+      const salesMap = new Map(ranking.map(x => [x.id,x.ventas]));
+      C.allProducts = (C.allProducts||[]).map(p => ({...p, ventas:salesMap.has(String(p.id)) ? salesMap.get(String(p.id)) : getSales(p)}));
+    } catch (e) {
+      const ranking = [...(C.allProducts||[])]
+        .map(p => ({id:String(p.id), ventas:getSales(p)}))
+        .filter(x => x.ventas > 0)
+        .sort((a,b)=>b.ventas-a.ventas);
+      C._masVendidosIds = new Set(ranking.slice(0, Math.min(5, ranking.length)).map(x=>x.id));
+    }
+  }
+
+  function esMasVendido(C,p){ return C._masVendidosIds?.has(String(p?.id)); }
+  function destacadoLegacy(p){
+    const raw=p?.esDestacado ?? p?.esdestacado ?? p?.es_destacado ?? p?.destacado;
+    return raw !== undefined && raw !== null && raw !== '' ? normalizeBool(raw) : (esNuevoAutomatico(p) || oferta(p));
+  }
+  function labelSelect(label,id,html){
+    return `<div class="jm-filter-field"><label for="${id}">${label}</label>${html}</div>`;
+  }
+  const style=document.createElement('style');
+  style.textContent=`
+    .jm-filter-field{display:flex;flex-direction:column;gap:5px;min-width:150px;flex:1}
+    .jm-filter-field label{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);padding-left:2px}
+    .jm-filter-field select{width:100%}
+    .pc-filter-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px!important;align-items:end}
+    @media(max-width:700px){.pc-filter-row{grid-template-columns:1fr!important;gap:9px!important}}
+  `;
+  document.head.appendChild(style);
+
+  function build(C,rootId,prefix){
+    const root=U.id(rootId); if(!root) return;
+    const gender=[['todos','Todos'],['Hombre','Hombre'],['Mujer','Mujer'],['Unisex','Unisex']];
+    const types=[['todos','Todos'],['Nicho','Nicho'],['Diseñador','Diseñador'],['Árabe','Árabe']];
+    const featured=[['todos','Todos'],['mas_vendidos','Más vendidos'],['ofertas','Ofertas'],['nuevos','Nuevos']];
+    const name=C===PublicCatalog?'PublicCatalog':'WholesaleCatalog';
+    root.innerHTML=`<div class="pc-filter-row">
+      ${labelSelect('GÉNERO',`${prefix}-filtro-genero`,`<select id="${prefix}-filtro-genero" class="pc-filter-select" onchange="${name}.setCategoria(this.value)">${gender.map(([k,l])=>`<option value="${k}" ${C.filtroGenero===k?'selected':''}>${l}</option>`).join('')}</select>`)}
+      ${labelSelect('TIPO',`${prefix}-filtro-tipo`,`<select id="${prefix}-filtro-tipo" class="pc-filter-select" onchange="${name}.setTipo(this.value)">${types.map(([k,l])=>`<option value="${k}" ${C.filtroTipo===k?'selected':''}>${l}</option>`).join('')}</select>`)}
+      ${labelSelect('DESTACADO',`${prefix}-filtro-destacado`,`<select id="${prefix}-filtro-destacado" class="pc-filter-select" onchange="${name}.setDestacado(this.value)">${featured.map(([k,l])=>`<option value="${k}" ${C.filtroDestacado===k?'selected':''}>${l}</option>`).join('')}</select>`)}
+    </div>`;
+  }
+  function patch(C,rootId,prefix){
+    if(!C) return;
+    C.renderFilters=function(){build(C,rootId,prefix)};
+    C.filterChange=U.debounce(function(){
+      const searchId=C===PublicCatalog?'pc-search':'wm-search';
+      const q=(U.id(searchId)?.value||'').toLowerCase().trim();
+      let productos=[...(C.allProducts||[])];
+      if(q) productos=productos.filter(p=>U.matchProducto(p,q));
+      if(C.filtroGenero!=='todos') productos=productos.filter(p=>String(p.genero||'')===String(C.filtroGenero));
+      if(C.filtroTipo!=='todos') productos=productos.filter(p=>String(p.tipoCatalogo||p.tipo_catalogo||(p.tipoProducto==='Original'?'Diseñador':p.tipoProducto)||'')===String(C.filtroTipo));
+      const d=C.filtroDestacado;
+      if(d==='mas_vendidos') productos=productos.filter(p=>esMasVendido(C,p));
+      else if(d==='ofertas') productos=productos.filter(oferta);
+      else if(d==='nuevos') productos=productos.filter(esNuevoAutomatico);
+      C.renderGrid(productos);
+    },200);
+  }
+  async function init(C,rootId,prefix){
+    if(!C) return;
+    patch(C,rootId,prefix);
+    await cargarMasVendidos(C);
+    C.allProducts=(C.allProducts||[]).map(p=>({...p,esNuevo:esNuevoAutomatico(p),esMasVendido:esMasVendido(C,p),esDestacado:destacadoLegacy(p)}));
+    C.renderFilters(); C.filterChange();
+  }
+  const run=async()=>{
+    if(typeof PublicCatalog==='undefined'||typeof WholesaleCatalog==='undefined'||typeof U==='undefined') return;
+    await init(PublicCatalog,'pc-filters','pc');
+    await init(WholesaleCatalog,'wm-filters','wm');
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run,{once:true}); else setTimeout(run,0);
+})();
+
 </script>
 </body>
 </html>
