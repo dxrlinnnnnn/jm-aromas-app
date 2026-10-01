@@ -1269,25 +1269,350 @@ body.wholesale-mode #wholesale-catalog {
 #public-catalog .pc-logo-mark img,#wholesale-catalog .pc-logo-mark img{display:block!important;visibility:visible!important;opacity:1!important;width:48px!important;height:48px!important;object-fit:contain!important}
 @media(max-width:600px){#pc-cart-bar,#wm-cart-bar{right:12px!important;bottom:12px!important}#pc-cart-bar .pc-cart-inner,#wm-cart-bar .pc-cart-inner{padding:7px 8px!important}#pc-cart-bar .pc-cart-inner .btn,#wm-cart-bar .pc-cart-inner .btn{padding:7px 9px!important}}
 </style>
+<style>
+/* ═══ J&M AROMAS — Catálogo público · estilo boutique (usa tu paleta y tu logo) ═══ */
+#public-catalog{--pc-card:var(--bg2);--pc-line:rgba(201,168,118,.28)}
+#public-catalog .pc-announce{background:#0a0a09;border-bottom:1px solid var(--border);padding:9px 14px;color:var(--text2);font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em}
+#public-catalog .pc-announce-row{display:flex;align-items:center;gap:8px}
+#public-catalog .pc-announce-center{justify-content:center;color:var(--text1);padding-bottom:7px}
+#public-catalog .pc-announce-center svg{color:var(--gold)}
+#public-catalog .pc-announce-split{justify-content:space-between;gap:10px}
+#public-catalog .pc-announce a{display:inline-flex;align-items:center;gap:7px;color:var(--text2);text-decoration:none}
+#public-catalog .pc-announce a svg{color:var(--gold);flex:0 0 auto}
+#public-catalog .pc-announce a[hidden]{display:none}
+#public-catalog .pc-announce-split:has(a[hidden]){justify-content:center}
+
+#public-catalog .pc-header{padding:12px 0!important}
+#public-catalog .pc-header-3{display:grid!important;grid-template-columns:1fr auto 1fr;align-items:center}
+#public-catalog .pc-hdr-left{display:flex;justify-content:flex-start}
+#public-catalog .pc-hdr-right{display:flex;justify-content:flex-end}
+#public-catalog .pc-logo-center{flex-direction:column;gap:6px!important;align-items:center;text-align:center}
+#public-catalog .pc-logo-text{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05rem;letter-spacing:.32em;padding-left:.32em}
+#public-catalog .pc-wholesale-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:7px 12px;font-size:.7rem;font-weight:700;letter-spacing:.06em;cursor:pointer;white-space:nowrap}
+#public-catalog .pc-bag-btn{position:relative;background:transparent;border:0;color:var(--text1);padding:6px;cursor:pointer;display:flex}
+#public-catalog .pc-bag-badge{position:absolute;top:-2px;right:-4px;min-width:19px;height:19px;border-radius:50%;background:var(--gold);color:var(--bg0);font-size:.66rem;font-weight:800;display:none;align-items:center;justify-content:center;padding:0 4px}
+
+#public-catalog .pc-hero{padding:34px 0 8px}
+#public-catalog .pc-hero-kicker{order:-1;font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+#public-catalog .pc-hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;text-transform:uppercase;letter-spacing:.08em;font-size:clamp(1.7rem,7.4vw,2.8rem);line-height:1.12;margin-bottom:12px}
+#public-catalog .pc-hero p{max-width:620px;margin:0 auto;line-height:1.6}
+
+#public-catalog .pc-search-bar .form-control{height:54px;border-radius:6px;border:1px solid var(--pc-line);background:var(--bg1);padding-left:44px;font-size:.9rem}
+#public-catalog .pc-search-bar .search-wrap{position:relative;display:block;width:100%;max-width:none}
+#public-catalog .pc-search-bar .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);filter:grayscale(1) brightness(1.4);z-index:1}
+#public-catalog .pc-filter-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;overflow:visible!important;white-space:normal;padding:0 0 4px}
+#public-catalog .pc-filter-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+#public-catalog .pc-filter-label{margin:0;font-size:.62rem;letter-spacing:.2em;color:var(--gold)}
+#public-catalog .pc-filter-select{width:100%;height:44px;-webkit-appearance:none;appearance:none;background-color:var(--bg1)!important;color:var(--text1)!important;-webkit-text-fill-color:var(--text1)!important;opacity:1!important;border:1px solid var(--pc-line);border-radius:10px;padding:0 30px 0 12px!important;font-size:.82rem!important;text-overflow:ellipsis;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C9A876' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+#public-catalog .pc-result-count{font-size:.8rem;letter-spacing:.04em;margin:6px 0 16px}
+
+#public-catalog .pc-product-grid{gap:16px!important}
+#public-catalog .fragrance-card{background:var(--pc-card);border:1px solid var(--pc-line);border-radius:24px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+#public-catalog .fragrance-card:hover,#public-catalog .fragrance-card:active{transform:translateY(-3px);border-color:rgba(201,168,118,.55);box-shadow:0 14px 32px rgba(0,0,0,.5)}
+#public-catalog .fragrance-img{border-radius:18px;border:1px solid var(--pc-line);aspect-ratio:1/1.1;background:var(--bg3)}
+#public-catalog .fragrance-img::after{display:none}
+#public-catalog .fragrance-body{padding:14px 4px 4px}
+#public-catalog .fragrance-brand{font-size:.66rem;font-weight:700;letter-spacing:.2em;color:var(--text3);margin-bottom:5px}
+#public-catalog .fragrance-name{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:500;line-height:1.15;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#public-catalog .pc-spec{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.74rem;color:var(--text3);margin-bottom:9px}
+#public-catalog .pc-spec i{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
+#public-catalog .pc-gender{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--pc-line);border-radius:8px;padding:4px 9px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text1);margin-bottom:10px}
+#public-catalog .pc-gender-ic{font-size:.9rem;line-height:1}
+#public-catalog .pc-gic-m{color:var(--blue)}#public-catalog .pc-gic-f{color:#d6a3a0}#public-catalog .pc-gic-u{color:var(--gold)}
+#public-catalog .fragrance-price{font-size:1.08rem;font-weight:700;margin-bottom:8px}
+#public-catalog .pc-stock{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;color:var(--text2)}
+#public-catalog .pc-stock i{width:9px;height:9px;border-radius:50%}
+#public-catalog .pc-stock-ok i{background:#22C55E}#public-catalog .pc-stock-out i{background:var(--red)}
+#public-catalog .pc-new-badge{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(18,17,16,.82);backdrop-filter:blur(6px);border:1px solid var(--pc-line);border-radius:8px;padding:5px 9px;font-size:.62rem;font-weight:800;letter-spacing:.08em;color:var(--text1)}
+#public-catalog .pc-new-badge i{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+#public-catalog .pc-wa-fab{position:fixed;right:16px;bottom:24px;z-index:9998;width:68px;height:68px;border-radius:50%;background:#0a0a09;border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:transform .2s ease}
+#public-catalog .pc-wa-fab:active{transform:scale(.94)}
+#public-catalog .pc-wa-dot{position:absolute;top:2px;right:2px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid var(--bg0)}
+body:has(#pc-cart-bar) #public-catalog .pc-wa-fab{bottom:92px}
+
+#public-catalog .pc-product-grid{padding:0!important;margin:0!important}
+#public-catalog .pc-search-bar .form-control{box-sizing:border-box;width:100%}
+#public-catalog .pc-filter-field{min-width:0;width:100%}
+#public-catalog .pc-filter-select{box-sizing:border-box;max-width:100%;min-width:0}
+#public-catalog .pc-filter-grid,#public-catalog .pc-search-bar{box-sizing:border-box;max-width:100%}
+#public-catalog .fragrance-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}
+#public-catalog .pc-footer{padding-bottom:120px}
+@media (max-width:800px){
+  #public-catalog .pc-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #public-catalog .pc-product-grid .fragrance-card:nth-child(odd){margin-top:12px}
+  #public-catalog .pc-product-grid .fragrance-card:nth-child(1){margin-top:12px}
+  #public-catalog .pc-hide-sm{display:none}
+  #public-catalog .pc-logo-text{font-size:.9rem;letter-spacing:.26em}
+  #public-catalog .pc-announce{font-size:.58rem;letter-spacing:.1em;padding:8px 10px}
+  #public-catalog .fragrance-name{font-size:1.12rem}
+  #public-catalog .pc-filter-select{font-size:.76rem!important;padding-left:10px!important}
+}
+@media (min-width:801px) and (max-width:1100px){#public-catalog .pc-product-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media (min-width:1101px){#public-catalog .pc-product-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:22px!important}}
+</style>
+<style>
+#public-catalog .pc-search-row{display:flex;align-items:stretch;gap:10px}
+#public-catalog .pc-search-row .search-wrap{flex:1;min-width:0}
+#public-catalog .pc-filter-toggle{position:relative;flex:0 0 54px;width:54px;height:54px;border-radius:6px;border:1px solid var(--pc-line);background:var(--bg1);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease,border-color .2s ease}
+#public-catalog .pc-filter-toggle.open{background:var(--gold2);border-color:var(--gold)}
+#public-catalog .pc-filter-dot{display:none;position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--bg1)}
+#public-catalog .pc-filter-toggle.has-active .pc-filter-dot{display:block}
+</style>
+<style>
+#public-catalog .pc-announce{display:flex;justify-content:center;padding:8px 14px}
+#public-catalog .pc-announce-wholesale{display:inline-flex;align-items:center;gap:8px;background:transparent;border:0;color:var(--gold);font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;padding:2px 6px}
+#public-catalog .pc-hdr-left .pc-filter-toggle{flex:0 0 44px;width:44px;height:44px;border-radius:12px}
+#public-catalog .pc-header{overflow:visible}
+</style>
+<style>
+#public-catalog .pc-filter-backdrop{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:opacity .25s ease}
+#public-catalog .pc-filter-backdrop.open{opacity:1;pointer-events:auto}
+</style>
+<style>
+/* Menú de filtros: cae hacia abajo, a todo el ancho, filtros apilados */
+</style>
+<style>
+/* Menú de filtros compacto: cae hacia abajo desde el botón de las 3 rayas */
+</style>
+<style>
+/* ═══ Menú de filtros (versión definitiva): cae hacia abajo desde las 3 rayas, siempre igual ═══ */
+#public-catalog #pc-filters{display:none!important;position:absolute!important;top:100%!important;left:12px!important;right:auto!important;width:min(250px,calc(100vw - 24px))!important;margin:6px 0 0!important;padding:0!important;overflow:visible!important;white-space:normal!important;z-index:30}
+#public-catalog #pc-filters.open{display:block!important;animation:pcDrop .22s ease-out}
+@keyframes pcDrop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+#public-catalog #pc-filters .pc-filter-panel-inner{display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:10px!important;box-sizing:border-box;width:100%;max-width:none!important;padding:14px!important;background:#1d1c19!important;border:1px solid var(--pc-line)!important;border-radius:16px!important;box-shadow:0 18px 36px rgba(0,0,0,.65);opacity:1!important;transform:none!important;overflow:visible!important;min-height:0}
+#public-catalog #pc-filters .pc-filter-field{display:flex;flex-direction:column;gap:6px;width:100%!important;flex:0 0 auto!important}
+#public-catalog #pc-filters .pc-filter-select{width:100%!important;height:42px!important;flex:0 0 auto!important}
+#public-catalog #pc-filters .pc-filter-clear{align-self:flex-start;background:transparent;border:0;color:var(--gold);font-size:.74rem;font-weight:700;letter-spacing:.08em;text-decoration:underline;padding:2px 0;cursor:pointer}
+</style>
+<style>
+#public-catalog #pc-filters .jm-filter-field{display:flex;flex-direction:column;gap:6px;width:100%!important;min-width:0!important;flex:0 0 auto!important}
+#public-catalog #pc-filters .jm-filter-field label{padding:0;font-size:.62rem;font-weight:700;letter-spacing:.2em;color:var(--gold)}
+</style>
+<style>
+#public-catalog .pc-bag-badge.bump{animation:pcBump .4s ease}
+@keyframes pcBump{0%{transform:scale(1)}40%{transform:scale(1.5)}100%{transform:scale(1)}}
+#pc-cart-bar{display:none!important}
+
+/* ═══ J&M AROMAS — Tarjetas y ficha estilo boutique (colores originales oscuros/champagne) ═══ */
+:is(#public-catalog,#wholesale-catalog){--pc-card:var(--bg2);--pc-line:rgba(201,168,118,.28)}
+.modal.pc-detail{--pc-line:rgba(201,168,118,.28)}
+
+/* Tarjeta */
+:is(#public-catalog,#wholesale-catalog) .fragrance-card{display:flex;flex-direction:column;overflow:visible}
+:is(#public-catalog,#wholesale-catalog) .fragrance-body{flex:1;display:flex;flex-direction:column;padding:14px 4px 4px}
+:is(#public-catalog,#wholesale-catalog) .fragrance-brand{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+:is(#public-catalog,#wholesale-catalog) .fragrance-name{font-family:'Cormorant Garamond',serif;font-size:1.28rem!important;font-weight:500;line-height:1.15;color:var(--text1);margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+:is(#public-catalog,#wholesale-catalog) .pc-spec{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.74rem;color:var(--text3);margin-bottom:9px}
+:is(#public-catalog,#wholesale-catalog) .pc-spec i{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
+:is(#public-catalog,#wholesale-catalog) .pc-gender{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;border:1px solid var(--pc-line);border-radius:8px;padding:4px 9px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text1);margin-bottom:10px}
+:is(#public-catalog,#wholesale-catalog) .pc-gender-ic{font-size:.9rem;line-height:1}
+:is(#public-catalog,#wholesale-catalog) .pc-gic-m{color:var(--blue)}:is(#public-catalog,#wholesale-catalog) .pc-gic-f{color:#d6a3a0}:is(#public-catalog,#wholesale-catalog) .pc-gic-u{color:var(--gold)}
+:is(#public-catalog,#wholesale-catalog) .pc-stock{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:var(--text2)}
+:is(#public-catalog,#wholesale-catalog) .pc-stock i{width:9px;height:9px;border-radius:50%}
+:is(#public-catalog,#wholesale-catalog) .pc-stock-ok i{background:#22C55E}:is(#public-catalog,#wholesale-catalog) .pc-stock-out i{background:var(--red)}
+:is(#public-catalog,#wholesale-catalog) .pc-card-foot{margin-top:auto;padding-top:14px}
+:is(#public-catalog,#wholesale-catalog) .pc-card-foot .fragrance-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;border-top:1px solid var(--pc-line);padding-top:14px;margin-bottom:12px;color:var(--gold);font-weight:700;letter-spacing:.02em;font-size:1.05rem!important}
+.pc-btn-bag{width:100%;height:48px;border:0;border-radius:14px;background:linear-gradient(135deg,#ECDFC0,#C9A876);color:#121110;font-family:inherit;font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .15s ease,filter .15s ease}
+.pc-btn-bag:hover{filter:brightness(1.07)}.pc-btn-bag:active{transform:scale(.98)}
+.pc-btn-bag:disabled{background:var(--bg4);color:var(--text3);cursor:not-allowed;filter:none}
+
+/* Ficha del perfume (ventana por dentro) */
+.modal.pc-detail{max-width:540px;border-radius:26px;overflow-y:auto}
+.modal.pc-detail .modal-header{position:sticky;top:0;height:0;padding:0;border:0;z-index:5;overflow:visible}
+.modal.pc-detail .modal-title{display:none}
+.modal.pc-detail .modal-close{position:absolute;top:14px;right:14px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg1);border:1px solid var(--border2);color:var(--text1);font-size:18px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.modal.pc-detail .modal-body{padding:0}
+.modal.pc-detail .modal-footer{position:sticky;bottom:0;background:var(--bg2);border-top:1px solid var(--pc-line);padding:14px 20px;justify-content:stretch}
+.modal.pc-detail .modal-footer .pc-btn-bag{flex:1}
+.pcd-img{display:flex;align-items:center;justify-content:center;aspect-ratio:1/.92;background:var(--bg3);padding:22px 22px 6px;font-size:80px}
+.pcd-img img{width:100%;height:100%;object-fit:contain}
+.pcd-info{padding:18px 26px 24px}
+.pcd-brand{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.pcd-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;line-height:1.12;color:var(--text1);margin-bottom:8px}
+.pcd-spec{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:.78rem;color:var(--text3);margin-bottom:12px}
+.pcd-spec i{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.7}
+.pcd-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;margin-bottom:6px}
+.pcd-price{font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:.02em}
+.pcd-row .pc-stock{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;color:var(--text2)}
+.pcd-row .pc-stock i{width:9px;height:9px;border-radius:50%}
+.pcd-row .pc-stock-ok i{background:#22C55E}.pcd-row .pc-stock-out i{background:var(--red)}
+.pcd-row .pc-gender{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--pc-line);border-radius:8px;padding:4px 9px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text1)}
+.pcd-row .pc-gic-m{color:var(--blue)}.pcd-row .pc-gic-f{color:#d6a3a0}.pcd-row .pc-gic-u{color:var(--gold)}
+.pcd-title{margin:18px 0 0;padding-bottom:10px;border-bottom:1px solid var(--pc-line);font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text1)}
+.pcd-desc{padding-top:16px;font-size:1rem;line-height:1.65;color:var(--text2);white-space:pre-line}
+@media(max-width:600px){.pcd-info{padding:14px 20px 20px}.pcd-name{font-size:1.5rem}.pcd-desc{font-size:.95rem}}
+</style>
+
+<style id="index5-reference-adjustments">
+/* INDEX5: dimensiones del INDEX ORIGINAL, sin alterar la lógica existente */
+#public-catalog .pc-product-grid,
+#wholesale-catalog .pc-product-grid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr))!important;
+  gap:10px!important;
+  align-items:start!important;
+}
+#public-catalog .pc-product-grid .fragrance-card,
+#wholesale-catalog .pc-product-grid .fragrance-card{
+  min-width:0!important;
+  width:100%!important;
+  border-radius:var(--radius2)!important;
+}
+#public-catalog .pc-product-grid .fragrance-img,
+#wholesale-catalog .pc-product-grid .fragrance-img{
+  width:100%!important;
+  aspect-ratio:1/1.05!important;
+  overflow:hidden!important;
+}
+#public-catalog .pc-product-grid .fragrance-img img,
+#wholesale-catalog .pc-product-grid .fragrance-img img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  display:block!important;
+}
+#public-catalog .pc-product-grid .fragrance-body,
+#wholesale-catalog .pc-product-grid .fragrance-body{
+  padding:10px!important;
+}
+#public-catalog .pc-product-grid .fragrance-name,
+#wholesale-catalog .pc-product-grid .fragrance-name{
+  font-size:.84rem!important;
+  line-height:1.25!important;
+  margin-bottom:6px!important;
+}
+#public-catalog .pc-product-grid .fragrance-brand,
+#wholesale-catalog .pc-product-grid .fragrance-brand{
+  font-size:.60rem!important;
+  margin-bottom:3px!important;
+}
+#public-catalog .pc-product-grid .fragrance-price,
+#wholesale-catalog .pc-product-grid .fragrance-price{
+  font-size:.90rem!important;
+}
+#public-catalog .pc-product-grid .pc-spec,
+#wholesale-catalog .pc-product-grid .pc-spec{
+  font-size:.68rem!important;
+  gap:5px!important;
+  margin-bottom:6px!important;
+}
+
+/* Estados: todos vienen de los datos del producto, nunca del HTML de un producto concreto */
+.pc-state-badge{
+  position:relative!important;
+  top:auto!important; left:auto!important;
+  z-index:4!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:3px!important;
+  padding:3px 6px!important;
+  margin:0 3px 3px 0!important;
+  border-radius:6px!important;
+  background:rgba(18,17,16,.90)!important;
+  border:1px solid rgba(201,168,118,.30)!important;
+  color:var(--text1)!important;
+  font-size:.48rem!important;
+  font-weight:800!important;
+  letter-spacing:.05em!important;
+  line-height:1!important;
+  backdrop-filter:blur(4px)!important;
+  white-space:nowrap!important;
+}
+.pc-state-badge i{width:5px;height:5px;border-radius:50%;display:block;background:var(--gold);flex:0 0 5px}
+.pc-state-best,.pc-state-offer{top:auto!important}
+.pc-state-best i{background:var(--green)}
+.pc-state-offer i{background:var(--yellow)}
+.fragrance-img{position:relative!important}
+.fragrance-img .pc-state-badge{position:absolute!important;top:7px!important;left:7px!important;margin:0!important;transform:none!important}
+.fragrance-img .pc-state-badge + .pc-state-badge{top:29px!important}
+.fragrance-img .pc-state-badge + .pc-state-badge + .pc-state-badge{top:51px!important}
+
+/* Logo del catálogo: solo nombre, sin reservar espacio para la imagen */
+#public-catalog .pc-logo-mark,
+#wholesale-catalog .pc-logo-mark{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+}
+#public-catalog .pc-logo,
+#wholesale-catalog .pc-logo{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+}
+#public-catalog .pc-logo-text,
+#wholesale-catalog .pc-logo-text{
+  display:block!important;
+  font-family:'Cormorant Garamond',serif!important;
+  font-size:1.55rem!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:.18em!important;
+  padding-left:.18em!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+@media(max-width:600px){
+  #public-catalog .pc-product-grid,
+  #wholesale-catalog .pc-product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  #public-catalog .pc-product-grid .fragrance-body,
+  #wholesale-catalog .pc-product-grid .fragrance-body{padding:10px!important}
+  #public-catalog .pc-product-grid .fragrance-name,
+  #wholesale-catalog .pc-product-grid .fragrance-name{font-size:.84rem!important}
+  #public-catalog .pc-logo-text,
+  #wholesale-catalog .pc-logo-text{
+    font-size:1.25rem!important;
+    letter-spacing:.13em!important;
+    padding-left:.13em!important;
+  }
+}
+
+/* Público y Mayorista: misma presentación visual y misma fuente de estados. */
+#public-catalog .pc-state-badge, #wholesale-catalog .pc-state-badge{box-sizing:border-box!important}
+</style>
 </head>
 <body>
 
 <!-- ════ CATÁLOGO PÚBLICO (sin sesión, ruta ?catalogo=1) ════ -->
 <div id="public-catalog">
+  <div class="pc-filter-backdrop" id="pc-filter-backdrop" onclick="PublicCatalog.toggleFilters(false)"></div>
+  <div class="pc-announce">
+    <button type="button" class="pc-announce-wholesale" onclick="WholesaleCatalog.open()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3m-4 4 3 3m-6-1 2 2"/></svg>
+      <span>Acceso Mayorista</span>
+    </button>
+  </div>
   <header class="pc-header">
-    <div class="pc-header-inner">
-      <div class="pc-logo">
-        <div class="pc-logo-mark"><img class="brand-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8EZcfAAAB/lBMVEXbXpzal5vbocXfbSbZ4tbPb3zqkCLnn1b003Xz2IXl1rb8/Pvayqjv5coWFRXo3cEJCQrd0bEpKCbgza3Vw5358tmwppA3NTFYVU9uZ1d5dnBLSEaQhnNqaWhMRTqYlpDu6+PFt5qmm4djW04nIxvHu6aEemm3trHY1tCJiYhDOzLKycWoqKciHBi6spbu4b2jl3x6clybknqMxWuX2IccHSJJuC+CdF2UvGgeISAhHSBbW2LMaKrkxZR/gIKH03elwXeg146w2qfVQ4rYcq/Km67alcrCrpXbpazkoJXwtyoeIRw9PUI+QT0/QUA3tRA8uiZYUT5zFpV9foFrxVN7wWKTOLC0OZmsvH25xIyy56bRH4zYN4/aUzDZWGnQe4vTfMXZjMfZp9PqiBznmrLpqmrgo6zxwiv1ynRdYWBTvUFUwT1ZwENiX2B+gHlwvl2YRZufS62Af4OfoaO8Tp6yTqK1Uqqrpn2+wb+/wsDNADDVAlzRJVrZLInQN13QRzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD3VSiQAAAAgHRSTlP//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////xUHpOoAABdJSURBVHjaxZ0Fg+M4loAzs3QnS7LMlpnCUNQ0tDi4zMx8zAz71+9JhjiJ7TiV7jnNVOJK4virx5Il9US5uhGiItzVkErI1d8+uershKgaHm6aSpL/J0Ci4rFNJR83YNItOUO001elJMnHCEg0/Jj2KMbLAcmi8+oGMuQjgmcD9eo6edWAB8LTWr+gpklIZOw/pGlXiPEyQHKitbIhJA/RaTOO+C5GnFyIBz6wd4MGoeHRau4W4wkhxuRVABKM2x5aCUg834AAd3Z2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" alt="J&amp;M Aromas"></div>
+    <div class="pc-header-inner pc-header-3">
+      <div class="pc-hdr-left">
+        <button type="button" class="pc-filter-toggle" id="pc-filter-toggle" aria-label="Filtros" aria-expanded="false" onclick="PublicCatalog.toggleFilters()">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span class="pc-filter-dot"></span>
+        </button>
+      </div>
+      <div class="pc-logo pc-logo-center">
+        
         <span class="pc-logo-text">J&amp;M AROMAS</span>
       </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <button type="button" class="btn btn-secondary btn-sm" onclick="WholesaleCatalog.open()" style="display:flex;align-items:center;gap:6px;border-color:var(--gold);color:var(--gold);font-weight:700">
-          🔑 <span>Acceso Mayorista</span>
+      <div class="pc-hdr-right">
+        <button type="button" class="pc-bag-btn" aria-label="Ver mi pedido" onclick="PublicCatalog.cart.length ? PublicCatalog.openCart() : Toast.warning('Aún no has agregado perfumes a tu pedido')">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="pc-bag-badge" id="pc-bag-badge">0</span>
         </button>
       </div>
     </div>
+  <div class="pc-filter-panel" id="pc-filters"></div>
   </header>
   <div class="pc-hero">
+    <div class="pc-hero-kicker">Selección exclusiva de fragancias</div>
     <h1>Nuestra Colección de Fragancias</h1>
     <p>En este catálogo hemos reunido una selección única de fragancias. Cada una está diseñada para despertar emociones, revivir recuerdos inolvidables y acompañarte en cada momento especial de tu vida.</p>
   </div>
@@ -1296,9 +1621,12 @@ body.wholesale-mode #wholesale-catalog {
       <span class="search-icon">🔍</span>
       <input class="form-control" id="pc-search" placeholder="Buscar perfume, marca..." oninput="PublicCatalog.filterChange()"/>
     </div>
-    <div class="filter-chips" style="margin-top:12px" id="pc-filters"></div>
   </div>
   <div class="pc-body" id="pc-body"></div>
+  <a class="pc-wa-fab" href="https://wa.me/18496539085?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5l1.6-4.8A8 8 0 1 1 21 12z"/></svg>
+    <span class="pc-wa-dot"></span>
+  </a>
   <div class="pc-footer">J&amp;M Aromas · Catálogo actualizado en tiempo real</div>
 </div>
 
@@ -1307,7 +1635,7 @@ body.wholesale-mode #wholesale-catalog {
   <header class="pc-header">
     <div class="pc-header-inner">
       <div class="pc-logo">
-        <div class="pc-logo-mark"><img class="brand-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAMAAAC8EZcfAAAB/lBMVEXbXpzal5vbocXfbSbZ4tbPb3zqkCLnn1b003Xz2IXl1rb8/Pvayqjv5coWFRXo3cEJCQrd0bEpKCbgza3Vw5358tmwppA3NTFYVU9uZ1d5dnBLSEaQhnNqaWhMRTqYlpDu6+PFt5qmm4djW04nIxvHu6aEemm3trHY1tCJiYhDOzLKycWoqKciHBi6spbu4b2jl3x6clybknqMxWuX2IccHSJJuC+CdF2UvGgeISAhHSBbW2LMaKrkxZR/gIKH03elwXeg146w2qfVQ4rYcq/Km67alcrCrpXbpazkoJXwtyoeIRw9PUI+QT0/QUA3tRA8uiZYUT5zFpV9foFrxVN7wWKTOLC0OZmsvH25xIyy56bRH4zYN4/aUzDZWGnQe4vTfMXZjMfZp9PqiBznmrLpqmrgo6zxwiv1ynRdYWBTvUFUwT1ZwENiX2B+gHlwvl2YRZufS62Af4OfoaO8Tp6yTqK1Uqqrpn2+wb+/wsDNADDVAlzRJVrZLInQN13QRzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD3VSiQAAAAgHRSTlP//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////xUHpOoAABdJSURBVHjaxZ0Fg+M4loAzs3QnS7LMlpnCUNQ0tDi4zMx8zAz71+9JhjiJ7TiV7jnNVOJK4virx5Il9US5uhGiItzVkErI1d8+uershKgaHm6aSpL/J0Ci4rFNJR83YNItOUO001elJMnHCEg0/Jj2KMbLAcmi8+oGMuQjgmcD9eo6edWAB8LTWr+gpklIZOw/pGlXiPEyQHKitbIhJA/RaTOO+C5GnFyIBz6wd4MGoeHRau4W4wkhxuRVABKM2x5aCUg834AAd3Z2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" alt="J&amp;M Aromas"></div>
+        
         <div style="display:flex;align-items:center;gap:8px">
           <span class="pc-logo-text">J&amp;M AROMAS</span>
           <span class="badge badge-gold" style="font-size:.65rem;letter-spacing:.06em">MAYORISTA</span>
@@ -7607,6 +7935,101 @@ document.addEventListener('keydown', (e) => {
 // exista una policy RLS pública de SELECT sobre `productos` (ver
 // migración correspondiente); si no existe, el catálogo se verá vacío
 // en vez de fallar, ya que Supabase simplemente no devuelve filas.
+/* ═══ CatalogUI — tarjeta y ficha compartidas (público + mayorista) ═══ */
+const CatalogUI = {
+  stock(p) {
+    return p.disponible
+      ? '<span class="pc-stock pc-stock-ok"><i></i>Disponible</span>'
+      : '<span class="pc-stock pc-stock-out"><i></i>Agotado</span>';
+  },
+  gender(p) {
+    const g = String(p.genero || '').toLowerCase();
+    if (!g) return '';
+    const ic = g.startsWith('hom') ? ['♂', 'm'] : g.startsWith('muj') ? ['♀', 'f'] : ['⚥', 'u'];
+    return `<span class="pc-gender"><b class="pc-gender-ic pc-gic-${ic[1]}">${ic[0]}</b>${U.esc(p.genero)}</span>`;
+  },
+  price(p, base) {
+    const promo = Number(p.precioPromocional || 0), normal = Number(base || 0);
+    return (promo > 0 && promo < normal)
+      ? `<span style="text-decoration:line-through;color:var(--text3);font-size:.78rem;font-weight:500">${U.fmt.money(normal)}</span><span>${U.fmt.money(promo)}</span>`
+      : U.fmt.money(normal);
+  },
+  empty() {
+    return `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-state-icon" style="font-size:2.5rem">🌸</div>
+      <h3>No encontramos perfumes con estos filtros</h3>
+      <p>Prueba con otra combinación o término de búsqueda.</p>
+    </div>`;
+  },
+  card(name, p, base) {
+    const normalizeBool = v => {
+      if (typeof v === 'string') return ['true','1','si','sí','yes'].includes(v.trim().toLowerCase());
+      return !!v;
+    };
+    // Los estados son alimentados por la APP/Supabase.
+    // NUEVO y OFERTA son manuales desde el producto; MÁS VENDIDO se calcula por unidades vendidas.
+    const nuevo = normalizeBool(p.esNuevo ?? p.esnuevo);
+    const oferta = normalizeBool(p.esOferta ?? p.esoferta);
+    const masVendido = normalizeBool(p.esMasVendido ?? p.esmasvendido);
+
+    const badges = `
+      ${nuevo ? '<span class="pc-state-badge pc-state-new"><i></i>NUEVO</span>' : ''}
+      ${masVendido ? '<span class="pc-state-badge pc-state-best"><i></i>MÁS VENDIDO</span>' : ''}
+      ${oferta ? '<span class="pc-state-badge pc-state-offer"><i></i>OFERTA</span>' : ''}
+    `;
+
+    const spec = (p.presentacion || p.concentracion)
+      ? `<div class="pc-spec">${p.presentacion ? `<span>${U.esc(p.presentacion)}</span>` : ''}${(p.presentacion && p.concentracion) ? '<i></i>' : ''}${p.concentracion ? `<span>${U.esc(p.concentracion)}</span>` : ''}</div>` : '';
+
+    return `
+      <div class="fragrance-card" onclick="${name}.verDetalle('${p.id}')">
+        <div class="fragrance-img">
+          ${badges}
+          ${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover"/>` : '🌸'}
+        </div>
+        <div class="fragrance-body">
+          ${p.marca ? `<div class="fragrance-brand">${U.esc(p.marca)}</div>` : ''}
+          <div class="fragrance-name">${U.esc(p.nombre)}</div>
+          ${spec}
+          ${CatalogUI.gender(p)}
+          <div>${CatalogUI.stock(p)}</div>
+          <div class="pc-card-foot">
+            <div class="fragrance-price">${CatalogUI.price(p, base)}</div>
+            <button type="button" class="pc-btn-bag" ${p.disponible ? '' : 'disabled'}
+              onclick="event.stopPropagation();${name}.addToCart('${p.id}', 1)">${p.disponible ? 'Añadir a bolsa' : 'Agotado'}</button>
+          </div>
+        </div>
+      </div>`;
+  },
+  detail(C, name, p, base) {
+    const fams = C.familias(p.familiaOlfativa);
+    let desc = String(p.descripcion || '').trim();
+    if (!desc && fams.length) {
+      const g = String(p.genero || '').toLowerCase();
+      const para = g.startsWith('hom') ? 'Hombres' : g.startsWith('muj') ? 'Mujeres' : g ? 'Hombres y Mujeres' : '';
+      desc = `${p.nombre}${p.marca ? ' de ' + p.marca : ''} es una fragancia de la familia olfativa ${fams.join(', ')}${para ? ' para ' + para : ''}.`;
+    }
+    const spec = (p.presentacion || p.concentracion)
+      ? `<div class="pcd-spec">${p.presentacion ? `<span>${U.esc(p.presentacion)}</span>` : ''}${(p.presentacion && p.concentracion) ? '<i></i>' : ''}${p.concentracion ? `<span>${U.esc(p.concentracion)}</span>` : ''}</div>` : '';
+    const body = `
+      <div class="pcd-img">${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}"/>` : '🌸'}</div>
+      <div class="pcd-info">
+        ${p.marca ? `<div class="pcd-brand">${U.esc(p.marca)}</div>` : ''}
+        <div class="pcd-name">${U.esc(p.nombre)}</div>
+        ${spec}
+        <div class="pcd-row">
+          <span class="pcd-price">${CatalogUI.price(p, base)}</span>
+          ${CatalogUI.stock(p)}
+          ${CatalogUI.gender(p)}
+        </div>
+        ${desc ? `<h4 class="pcd-title">Descripción de la fragancia</h4><div class="pcd-desc">${U.esc(desc)}</div>` : ''}
+      </div>`;
+    const footer = `<button type="button" class="pc-btn-bag" ${p.disponible ? '' : 'disabled'}
+      onclick="${name}.addToCart('${p.id}', 1)">${p.disponible ? 'Añadir a bolsa' : 'Agotado'}</button>`;
+    App.openModal(U.esc(p.nombre), body, footer, 'pc-detail');
+  }
+};
+
 const PublicCatalog = {
   allProducts: [],
   cart: [],
@@ -7665,8 +8088,9 @@ const PublicCatalog = {
         tipoProducto: p.tipoproducto || p.tipo_producto || '',
         tipoCatalogo: p.tipo_catalogo ?? p.tipocatalogo ?? p.tipoproducto ?? p.tipo_producto ?? '',
         esDestacado: p.esdestacado ?? p.es_destacado ?? p.destacado,
-        esNuevo: !!p.esnuevo,
-        esMasVendido: !!p.esmasvendido,
+        esNuevo: p.esnuevo ?? p.esNuevo ?? false,
+        esMasVendido: p.esmasvendido ?? p.esMasVendido ?? false,
+        esOferta: p.esoferta ?? p.esOferta ?? false,
         concentracion: p.concentracion,
         familiaOlfativa: p.familia_olfativa ?? p.familiaolfativa,
         ventas: Number(p.ventas || 0),
@@ -7734,21 +8158,15 @@ const PublicCatalog = {
   },
 
   renderCart() {
-    let bar = document.getElementById('pc-cart-bar');
-    if (!PublicCatalog.cart.length) { if (bar) bar.remove(); return; }
-    const total = PublicCatalog.cart.reduce((s, x) => {
-      const p = PublicCatalog.allProducts.find(p => p.id === x.id);
-      return s + (p ? (p.precioPromocional || p.precio) * x.qty : 0);
-    }, 0);
-    if (!bar) { bar = document.createElement('div'); bar.id = 'pc-cart-bar'; document.body.appendChild(bar); }
-    bar.innerHTML = `
-      <div class="pc-cart-inner">
-        <div>
-          <div class="pc-cart-icon">🛒</div>
-          <div class="pc-cart-summary"><strong>${PublicCatalog.cart.reduce((s, x) => s + x.qty, 0)} producto${PublicCatalog.cart.reduce((s, x) => s + x.qty, 0) === 1 ? '' : 's'}</strong></div>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="PublicCatalog.openCart()">Ver carrito</button>
-      </div>`;
+    // Sin barra inferior: el carrito vive en el icono de bolsa de arriba
+    const _n = PublicCatalog.cart.reduce((t, x) => t + x.qty, 0);
+    const _bb = document.getElementById('pc-bag-badge');
+    if (_bb) {
+      const _prev = parseInt(_bb.textContent, 10) || 0;
+      _bb.textContent = _n; _bb.style.display = _n ? 'flex' : 'none';
+      if (_n > _prev) { _bb.classList.remove('bump'); void _bb.offsetWidth; _bb.classList.add('bump'); }
+    }
+    const _bar = document.getElementById('pc-cart-bar'); if (_bar) _bar.remove();
   },
 
   openCart() {
@@ -7795,11 +8213,28 @@ const PublicCatalog = {
     const featured = [['todos','Todos'],['ofertas','Ofertas'],['nuevos','Nuevos'],['mas_vendidos','Más vendidos']];
     const root = U.id('pc-filters');
     if (!root) return;
-    root.innerHTML = `<div class="pc-filter-row">
-      <select class="pc-filter-select" aria-label="Género" onchange="PublicCatalog.setCategoria(this.value)">${gender.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroGenero===k?'selected':''}>${l}</option>`).join('')}</select>
-      <select class="pc-filter-select" aria-label="Tipo" onchange="PublicCatalog.setTipo(this.value)">${types.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroTipo===k?'selected':''}>${l}</option>`).join('')}</select>
-      <select class="pc-filter-select" aria-label="Destacados" onchange="PublicCatalog.setDestacado(this.value)">${featured.map(([k,l])=>`<option value="${k}" ${PublicCatalog.filtroDestacado===k?'selected':''}>${l}</option>`).join('')}</select>
+    const field = (label, fn, cur, arr) => `<label class="pc-filter-field"><span class="pc-filter-label">${label}</span><select class="pc-filter-select" aria-label="${label}" onchange="PublicCatalog.${fn}(this.value)">${arr.map(([k,l])=>`<option value="${k}" ${cur===k?'selected':''}>${l}</option>`).join('')}</select></label>`;
+    const activos = [PublicCatalog.filtroGenero, PublicCatalog.filtroTipo, PublicCatalog.filtroDestacado].filter(v => v !== 'todos').length;
+    root.innerHTML = `<div class="pc-filter-panel-inner">
+      ${field('Género','setCategoria',PublicCatalog.filtroGenero,gender)}
+      ${field('Tipo','setTipo',PublicCatalog.filtroTipo,types)}
+      ${field('Destacado','setDestacado',PublicCatalog.filtroDestacado,featured)}
+      ${activos ? '<button type="button" class="pc-filter-clear" onclick="PublicCatalog.clearFilters()">Limpiar filtros</button>' : ''}
     </div>`;
+    const tg = U.id('pc-filter-toggle'); if (tg) tg.classList.toggle('has-active', activos > 0);
+  },
+
+  toggleFilters(force) {
+    const p = U.id('pc-filters'), t = U.id('pc-filter-toggle'), bd = U.id('pc-filter-backdrop');
+    if (!p) return;
+    const open = typeof force === 'boolean' ? force : !p.classList.contains('open');
+    p.classList.toggle('open', open);
+    if (bd) bd.classList.toggle('open', open);
+    if (t) { t.classList.toggle('open', open); t.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  },
+  clearFilters() {
+    PublicCatalog.filtroGenero = 'todos'; PublicCatalog.filtroTipo = 'todos'; PublicCatalog.filtroDestacado = 'todos';
+    PublicCatalog.renderFilters(); PublicCatalog.filterChange();
   },
 
   setCategoria(key) { PublicCatalog.filtroGenero = key; PublicCatalog.renderFilters(); PublicCatalog.filterChange(); },
@@ -7825,75 +8260,16 @@ const PublicCatalog = {
 
   renderGrid(productos) {
     const total = PublicCatalog.allProducts.length;
-    const stockBadge = p => p.disponible
-      ? '<span class="fragrance-stock-badge stock-ok">🟢 Disponible</span>'
-      : '<span class="fragrance-stock-badge stock-out">🔴 Agotado</span>';
-
     U.id('pc-body').innerHTML = `
       <div class="pc-result-count">Mostrando <strong>${productos.length}</strong> de <strong>${total}</strong> perfumes</div>
       <div class="pos-products-grid pc-product-grid">
-        ${productos.length ? productos.map(p => `
-          <div class="fragrance-card" onclick="PublicCatalog.verDetalle('${p.id}')">
-            <div class="fragrance-img">
-              ${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}" loading="lazy" style="width:100%;height:100%;object-fit:cover"/>` : '🌸'}
-            </div>
-            <div class="fragrance-body">
-              ${p.marca ? `<div class="fragrance-brand">${U.esc(p.marca)}</div>` : ''}
-              <div class="fragrance-name">${U.esc(p.nombre)}</div>
-              <div class="fragrance-price">
-                ${p.precioPromocional ? `<span style="text-decoration:line-through;color:var(--text3);font-size:.78rem;margin-right:6px">${U.fmt.money(p.precio)}</span><span style="color:var(--gold)">${U.fmt.money(p.precioPromocional)}</span>` : U.fmt.money(p.precio)}
-              </div>
-              <div class="fragrance-meta">${stockBadge(p)}</div>
-            </div>
-          </div>`).join('') : `
-          <div class="empty-state" style="grid-column:1/-1">
-            <div class="empty-state-icon" style="font-size:2.5rem">🌸</div>
-            <h3>No encontramos perfumes con estos filtros</h3>
-            <p>Prueba con otra combinación o término de búsqueda.</p>
-          </div>`}
+        ${productos.length ? productos.map(p => CatalogUI.card('PublicCatalog', p, p.precio)).join('') : CatalogUI.empty()}
       </div>`;
   },
 
-  async verDetalle(id) {
+  verDetalle(id) {
     const p = PublicCatalog.allProducts.find(x => x.id === id);
-    if (!p) return;
-    const stockBadge = p.disponible
-      ? '<span class="fragrance-stock-badge stock-ok">🟢 Disponible</span>'
-      : '<span class="fragrance-stock-badge stock-out">🔴 Agotado</span>';
-    const familias = PublicCatalog.familias(p.familiaOlfativa);
-
-    const modalBody = `
-      <div class="frag-detail-hero" style="padding:0">
-        <div class="frag-detail-image">
-          ${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/>` : '🌸'}
-        </div>
-        <div>
-          ${p.marca ? `<div class="frag-detail-brand">${U.esc(p.marca)}</div>` : ''}
-          <div class="frag-detail-name" style="font-size:1.3rem">${U.esc(p.nombre)}</div>
-          <div class="frag-detail-price">
-            ${p.precioPromocional ? `<span style="text-decoration:line-through;color:var(--text3);font-size:1rem;margin-right:8px">${U.fmt.money(p.precio)}</span><span style="color:var(--gold)">${U.fmt.money(p.precioPromocional)}</span>` : U.fmt.money(p.precio)}
-          </div>
-          <div style="margin-bottom:10px;display:flex;gap:6px;flex-wrap:wrap">
-            ${stockBadge}
-            ${p.genero ? `<span class="badge badge-gray">${U.esc(p.genero)}</span>` : ''}
-            ${p.tipoProducto ? `<span class="badge badge-gold">${U.esc(p.tipoProducto)}</span>` : ''}
-          </div>
-          <div class="pc-family pc-family-detail">
-            ${familias.length ? familias.map(f => `<span>${U.esc(f)}</span>`).join('') : ''}
-          </div>
-          ${p.concentracion ? `<div style="font-size:.78rem;color:var(--text3);margin-top:8px">Concentración: ${U.esc(p.concentracion)}</div>` : ''}
-          ${p.presentacion ? `<div style="font-size:.78rem;color:var(--text3);margin-top:3px">Presentación: ${U.esc(p.presentacion)}</div>` : ''}
-        </div>
-      </div>
-      ${p.descripcion ? `<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:.82rem;color:var(--text2);line-height:1.6">${U.esc(p.descripcion)}</div>` : ''}
-    `;
-
-    const actions = `
-      <button type="button" class="btn btn-secondary" onclick="App.closeModal()">Cerrar</button>
-      ${p.disponible ? `<button type="button" class="btn btn-primary" onclick="PublicCatalog.addToCart('${p.id}', 1)">🛒 Agregar al pedido</button>` : ''}
-    `;
-
-    App.openModal(U.esc(p.nombre), modalBody, actions, 'modal-lg');
+    if (p) CatalogUI.detail(PublicCatalog, 'PublicCatalog', p, p.precio);
   }
 };
 
@@ -8107,8 +8483,9 @@ const WholesaleCatalog = {
           tipoProducto: p.tipoproducto || p.tipo_producto || pub.tipoproducto || pub.tipo_producto || '',
           tipoCatalogo: p.tipo_catalogo ?? p.tipocatalogo ?? (p.tipoproducto === 'Original' ? 'Diseñador' : p.tipoproducto),
           esDestacado: p.esdestacado ?? p.es_destacado ?? p.destacado,
-          esNuevo: !!p.esnuevo,
-          esMasVendido: !!p.esmasvendido,
+          esNuevo: p.esnuevo ?? p.esNuevo ?? false,
+          esMasVendido: p.esmasvendido ?? p.esMasVendido ?? false,
+          esOferta: p.esoferta ?? p.esOferta ?? false,
           concentracion: p.concentracion || p.concentracion_nombre || pub.concentracion || pub.concentracion_nombre || '',
           familiaOlfativa: p.familia_olfativa ?? p.familiaolfativa ?? pub.familia_olfativa ?? pub.familiaolfativa,
           descripcion: p.descripcion || p.descripcion_producto || p.description || pub.descripcion || pub.descripcion_producto || pub.description || '',
@@ -8292,75 +8669,16 @@ const WholesaleCatalog = {
 
   renderGrid(productos) {
     const total = WholesaleCatalog.allProducts.length;
-    const stockBadge = p => p.disponible
-      ? '<span class="fragrance-stock-badge stock-ok">🟢 Disponible</span>'
-      : '<span class="fragrance-stock-badge stock-out">🔴 Agotado</span>';
-
     U.id('wm-body').innerHTML = `
       <div class="pc-result-count">Mostrando <strong>${productos.length}</strong> de <strong>${total}</strong> perfumes</div>
       <div class="pos-products-grid pc-product-grid">
-        ${productos.length ? productos.map(p => `
-          <div class="fragrance-card" onclick="WholesaleCatalog.verDetalle('${p.id}')">
-            <div class="fragrance-img">
-              ${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}" loading="lazy" style="width:100%;height:100%;object-fit:cover"/>` : '🌸'}
-            </div>
-            <div class="fragrance-body">
-              ${p.marca ? `<div class="fragrance-brand">${U.esc(p.marca)}</div>` : ''}
-              <div class="fragrance-name">${U.esc(p.nombre)}</div>
-              <div class="fragrance-price">
-                ${p.precioPromocional && Number(p.precioPromocional) < Number(p.precioMayorista) ? `<span style="text-decoration:line-through;color:var(--text3);font-size:.78rem;margin-right:6px">${U.fmt.money(p.precioMayorista)}</span><span style="color:var(--gold)">${U.fmt.money(p.precioPromocional)}</span>` : U.fmt.money(p.precioMayorista)}
-              </div>
-              <div class="fragrance-meta">${stockBadge(p)}</div>
-            </div>
-          </div>`).join('') : `
-          <div class="empty-state" style="grid-column:1/-1">
-            <div class="empty-state-icon" style="font-size:2.5rem">🌸</div>
-            <h3>No encontramos perfumes con estos filtros</h3>
-            <p>Prueba con otra combinación o término de búsqueda.</p>
-          </div>`}
+        ${productos.length ? productos.map(p => CatalogUI.card('WholesaleCatalog', p, p.precioMayorista)).join('') : CatalogUI.empty()}
       </div>`;
   },
 
-  async verDetalle(id) {
+  verDetalle(id) {
     const p = WholesaleCatalog.allProducts.find(x => x.id === id);
-    if (!p) return;
-    const stockBadge = p.disponible
-      ? '<span class="fragrance-stock-badge stock-ok">🟢 Disponible</span>'
-      : '<span class="fragrance-stock-badge stock-out">🔴 Agotado</span>';
-    const familias = WholesaleCatalog.familias(p.familiaOlfativa);
-
-    const modalBody = `
-      <div class="frag-detail-hero" style="padding:0">
-        <div class="frag-detail-image">
-          ${p.imagen ? `<img src="${U.esc(p.imagen)}" alt="${U.esc(p.nombre)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/>` : '🌸'}
-        </div>
-        <div>
-          ${p.marca ? `<div class="frag-detail-brand">${U.esc(p.marca)}</div>` : ''}
-          <div class="frag-detail-name" style="font-size:1.3rem">${U.esc(p.nombre)}</div>
-          <div class="frag-detail-price">
-            ${p.precioPromocional && Number(p.precioPromocional) < Number(p.precioMayorista) ? `<span style="text-decoration:line-through;color:var(--text3);font-size:1rem;margin-right:8px">${U.fmt.money(p.precioMayorista)}</span><span style="color:var(--gold)">${U.fmt.money(p.precioPromocional)}</span>` : U.fmt.money(p.precioMayorista)}
-          </div>
-          <div style="margin-bottom:10px;display:flex;gap:6px;flex-wrap:wrap">
-            ${stockBadge}
-            ${p.genero ? `<span class="badge badge-gray">${U.esc(p.genero)}</span>` : ''}
-            ${p.tipoProducto ? `<span class="badge badge-gold">${U.esc(p.tipoProducto)}</span>` : ''}
-          </div>
-          <div class="pc-family pc-family-detail">
-            ${familias.length ? familias.map(f => `<span>${U.esc(f)}</span>`).join('') : ''}
-          </div>
-          ${p.concentracion ? `<div style="font-size:.78rem;color:var(--text3);margin-top:8px">Concentración: ${U.esc(p.concentracion)}</div>` : ''}
-          ${p.presentacion ? `<div style="font-size:.78rem;color:var(--text3);margin-top:3px">Presentación: ${U.esc(p.presentacion)}</div>` : ''}
-        </div>
-      </div>
-      ${p.descripcion ? `<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:.82rem;color:var(--text2);line-height:1.6">${U.esc(p.descripcion)}</div>` : ''}
-    `;
-
-    const actions = `
-      <button type="button" class="btn btn-secondary" onclick="App.closeModal()">Cerrar</button>
-      ${p.disponible ? `<button type="button" class="btn btn-primary" onclick="WholesaleCatalog.addToCart('${p.id}', 1)">🛒 Agregar al pedido</button>` : ''}
-    `;
-
-    App.openModal(U.esc(p.nombre), modalBody, actions, 'modal-lg');
+    if (p) CatalogUI.detail(WholesaleCatalog, 'WholesaleCatalog', p, p.precioMayorista);
   }
 };
 
@@ -8373,19 +8691,12 @@ document.addEventListener('DOMContentLoaded', () => App.init());
     if (typeof v === 'string') return ['true','1','si','sí','yes'].includes(v.trim().toLowerCase());
     return !!v;
   };
-  const oferta = p => {
-    const normal = Number(p?.precio ?? p?.precioMayorista ?? 0);
-    const promo = Number(p?.precioPromocional ?? 0);
-    return promo > 0 && normal > 0 && promo < normal;
-  };
-  const esNuevoAutomatico = p => {
-    if (normalizeBool(p?.esNuevo ?? p?.esnuevo)) return true;
-    const fecha = p?.creado;
-    if (!fecha) return false;
-    const t = new Date(fecha).getTime();
-    return Number.isFinite(t) && (Date.now() - t) <= 30 * 86400000;
-  };
-  const getSales = p => Number(p?.ventas ?? p?.cantidadVendida ?? 0) || 0;
+  // Fuente única de verdad para estados del catálogo.
+  // NUEVO y OFERTA: se marcan manualmente desde la APP.
+  // MÁS VENDIDO: se determina automáticamente por unidades vendidas.
+  const oferta = p => normalizeBool(p?.esOferta ?? p?.esoferta);
+  const esNuevoAutomatico = p => normalizeBool(p?.esNuevo ?? p?.esnuevo);
+  const getSales = p => Number(p?.ventas ?? p?.cantidadVendida ?? p?.unidadesVendidas ?? 0) || 0;
 
   async function cargarMasVendidos(C){
     try {
@@ -8394,31 +8705,41 @@ document.addEventListener('DOMContentLoaded', () => App.init());
         .select('id,ventas')
         .order('ventas', { ascending:false });
       if (error) throw error;
-      const rows = (data || []).map(x => ({id:String(x.id), ventas:Number(x.ventas||0)})).filter(x => x.ventas > 0);
-      const fallback = [...(C.allProducts||[])]
-        .map(p => ({id:String(p.id), ventas:getSales(p)}))
-        .filter(x => x.ventas > 0)
+
+      const rows = (data || [])
+        .map(x => ({id:String(x.id), ventas:Number(x.ventas||0)}))
+        .filter(x => Number.isFinite(x.ventas) && x.ventas > 0)
         .sort((a,b)=>b.ventas-a.ventas);
-      const ranking = rows.length ? rows : fallback;
-      // Automático: se consideran "Más vendidos" los 5 primeros productos con ventas.
-      // No se escribe ningún flag en productos ni se requiere marcar nada manualmente.
-      const top = ranking.slice(0, Math.min(5, ranking.length));
-      C._masVendidosIds = new Set(top.map(x => x.id));
-      const salesMap = new Map(ranking.map(x => [x.id,x.ventas]));
-      C.allProducts = (C.allProducts||[]).map(p => ({...p, ventas:salesMap.has(String(p.id)) ? salesMap.get(String(p.id)) : getSales(p)}));
+
+      // El producto con MÁS unidades vendidas es el único que recibe MÁS VENDIDO.
+      // Si hay empate en el máximo, se muestran todos los empatados.
+      const maxVentas = rows.length ? rows[0].ventas : 0;
+      const topIds = maxVentas > 0 ? rows.filter(x => x.ventas === maxVentas).map(x => x.id) : [];
+      C._masVendidosIds = new Set(topIds);
+
+      const salesMap = new Map(rows.map(x => [x.id,x.ventas]));
+      C.allProducts = (C.allProducts||[]).map(p => ({
+        ...p,
+        ventas: salesMap.has(String(p.id)) ? salesMap.get(String(p.id)) : getSales(p),
+        esMasVendido: topIds.includes(String(p.id))
+      }));
     } catch (e) {
-      const ranking = [...(C.allProducts||[])]
+      // Respaldo: usar las unidades vendidas que ya vengan con el catálogo.
+      const rows = [...(C.allProducts||[])]
         .map(p => ({id:String(p.id), ventas:getSales(p)}))
-        .filter(x => x.ventas > 0)
+        .filter(x => Number.isFinite(x.ventas) && x.ventas > 0)
         .sort((a,b)=>b.ventas-a.ventas);
-      C._masVendidosIds = new Set(ranking.slice(0, Math.min(5, ranking.length)).map(x=>x.id));
+      const maxVentas = rows.length ? rows[0].ventas : 0;
+      const topIds = maxVentas > 0 ? rows.filter(x => x.ventas === maxVentas).map(x => x.id) : [];
+      C._masVendidosIds = new Set(topIds);
+      C.allProducts = (C.allProducts||[]).map(p => ({...p, esMasVendido:topIds.includes(String(p.id))}));
     }
   }
 
   function esMasVendido(C,p){ return C._masVendidosIds?.has(String(p?.id)); }
   function destacadoLegacy(p){
     const raw=p?.esDestacado ?? p?.esdestacado ?? p?.es_destacado ?? p?.destacado;
-    return raw !== undefined && raw !== null && raw !== '' ? normalizeBool(raw) : (esNuevoAutomatico(p) || oferta(p));
+    return raw !== undefined && raw !== null && raw !== '' ? normalizeBool(raw) : false;
   }
   function labelSelect(label,id,html){
     return `<div class="jm-filter-field"><label for="${id}">${label}</label>${html}</div>`;
@@ -8439,11 +8760,15 @@ document.addEventListener('DOMContentLoaded', () => App.init());
     const types=[['todos','Todos'],['Nicho','Nicho'],['Diseñador','Diseñador'],['Árabe','Árabe']];
     const featured=[['todos','Todos'],['mas_vendidos','Más vendidos'],['ofertas','Ofertas'],['nuevos','Nuevos']];
     const name=C===PublicCatalog?'PublicCatalog':'WholesaleCatalog';
-    root.innerHTML=`<div class="pc-filter-row">
+    const isPub=C===PublicCatalog;
+    const activos=[C.filtroGenero,C.filtroTipo,C.filtroDestacado].filter(v=>v!=='todos').length;
+    root.innerHTML=`<div class="${isPub?'pc-filter-panel-inner':'pc-filter-row'}">
       ${labelSelect('GÉNERO',`${prefix}-filtro-genero`,`<select id="${prefix}-filtro-genero" class="pc-filter-select" onchange="${name}.setCategoria(this.value)">${gender.map(([k,l])=>`<option value="${k}" ${C.filtroGenero===k?'selected':''}>${l}</option>`).join('')}</select>`)}
       ${labelSelect('TIPO',`${prefix}-filtro-tipo`,`<select id="${prefix}-filtro-tipo" class="pc-filter-select" onchange="${name}.setTipo(this.value)">${types.map(([k,l])=>`<option value="${k}" ${C.filtroTipo===k?'selected':''}>${l}</option>`).join('')}</select>`)}
       ${labelSelect('DESTACADO',`${prefix}-filtro-destacado`,`<select id="${prefix}-filtro-destacado" class="pc-filter-select" onchange="${name}.setDestacado(this.value)">${featured.map(([k,l])=>`<option value="${k}" ${C.filtroDestacado===k?'selected':''}>${l}</option>`).join('')}</select>`)}
+      ${isPub&&activos?'<button type="button" class="pc-filter-clear" onclick="PublicCatalog.clearFilters()">Limpiar filtros</button>':''}
     </div>`;
+    if(isPub){const tg=U.id('pc-filter-toggle'); if(tg) tg.classList.toggle('has-active',activos>0);}
   }
   function patch(C,rootId,prefix){
     if(!C) return;
@@ -8466,7 +8791,13 @@ document.addEventListener('DOMContentLoaded', () => App.init());
     if(!C) return;
     patch(C,rootId,prefix);
     await cargarMasVendidos(C);
-    C.allProducts=(C.allProducts||[]).map(p=>({...p,esNuevo:esNuevoAutomatico(p),esMasVendido:esMasVendido(C,p),esDestacado:destacadoLegacy(p)}));
+    C.allProducts=(C.allProducts||[]).map(p=>({
+      ...p,
+      esNuevo: esNuevoAutomatico(p),
+      esMasVendido: esMasVendido(C,p),
+      esOferta: oferta(p),
+      esDestacado: destacadoLegacy(p)
+    }));
     C.renderFilters(); C.filterChange();
   }
   const run=async()=>{
