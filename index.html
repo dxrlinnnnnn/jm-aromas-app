@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
@@ -1326,10 +1326,7 @@ body.wholesale-mode #wholesale-catalog {
 #public-catalog .pc-new-badge{position:absolute;top:10px;left:10px;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(18,17,16,.82);backdrop-filter:blur(6px);border:1px solid var(--pc-line);border-radius:8px;padding:5px 9px;font-size:.62rem;font-weight:800;letter-spacing:.08em;color:var(--text1)}
 #public-catalog .pc-new-badge i{width:7px;height:7px;border-radius:50%;background:var(--gold)}
 
-#public-catalog .pc-wa-fab{position:fixed;right:16px;bottom:24px;z-index:9998;width:68px;height:68px;border-radius:50%;background:#0a0a09;border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:transform .2s ease}
-#public-catalog .pc-wa-fab:active{transform:scale(.94)}
 #public-catalog .pc-wa-dot{position:absolute;top:2px;right:2px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid var(--bg0)}
-body:has(#pc-cart-bar) #public-catalog .pc-wa-fab{bottom:92px}
 
 #public-catalog .pc-product-grid{padding:0!important;margin:0!important}
 #public-catalog .pc-search-bar .form-control{box-sizing:border-box;width:100%}
@@ -1613,12 +1610,13 @@ body.catalog-mode #wholesale-catalog{display:none!important}
 /* Bolsa: estructura basada en la imagen adjunta, adaptada a J&M AROMAS. */
 .modal.jm-cart-modal{
   width:min(760px,calc(100vw - 28px));max-width:760px;max-height:min(92vh,900px);
-  padding:0;overflow:hidden;border-radius:24px;background:var(--bg1);
-  border:1px solid rgba(201,168,118,.34)
+  height:min(92vh,900px);padding:0;overflow:hidden;border-radius:24px;background:var(--bg1);
+  border:1px solid rgba(201,168,118,.34);
+  display:flex;flex-direction:column;min-height:0
 }
 .modal.jm-cart-modal .modal-header{display:none}
-.modal.jm-cart-modal .modal-body{padding:0;max-height:calc(92vh - 92px);overflow:auto}
-.modal.jm-cart-modal .modal-footer{padding:0;border-top:1px solid rgba(201,168,118,.24);background:var(--bg1)}
+.modal.jm-cart-modal .modal-body{padding:0;max-height:none;overflow:hidden;flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.modal.jm-cart-modal .modal-footer{display:block;padding:0;border-top:1px solid rgba(201,168,118,.24);background:var(--bg1);flex:0 0 auto;min-height:0}
 .jm-cart{display:flex;flex-direction:column;min-height:100%}
 .jm-cart-head{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -1659,31 +1657,225 @@ body.catalog-mode #wholesale-catalog{display:none!important}
 .jm-cart-qty span{width:32px;text-align:center;font-size:.82rem;font-weight:800;color:var(--text1)}
 .jm-cart-remove{border:0;background:transparent;color:var(--text3);cursor:pointer;padding:4px;font-size:18px}
 .jm-cart-remove:hover{color:var(--red)}
-.jm-cart-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px}
+.jm-cart-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;padding:18px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .jm-cart-summary-label{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text2)}
-.jm-cart-summary-total{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1;color:var(--text1);white-space:nowrap}
-.jm-cart-footer{display:flex;gap:10px;padding:0 24px 22px}
-.jm-cart-footer .btn{flex:1;min-height:50px}
+.jm-cart-summary-total{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1;color:var(--text1);white-space:nowrap;margin-left:auto}
+/* El subtotal es una barra independiente; el botón queda debajo. */
+.modal.jm-cart-modal .modal-footer{display:block}
+.jm-cart-footer{display:flex;gap:10px;width:100%;padding:12px 24px 22px}
+.jm-cart-footer .btn{width:100%;min-height:50px;flex:1 1 100%}
 .jm-cart-whatsapp{background:#0aa83f!important;border-color:#0aa83f!important;color:#fff!important;letter-spacing:.1em}
 @media(max-width:600px){
+  /* Catálogo: se conservan exactamente sus reglas visuales actuales. */
   #public-catalog .pc-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
   #public-catalog .fragrance-body{padding:10px!important}
   #public-catalog .fragrance-name{font-size:.84rem!important}
-  .modal.jm-cart-modal{width:100vw;max-width:none;max-height:100vh;height:100vh;border-radius:0;border-left:0;border-right:0}
-  .modal.jm-cart-modal .modal-body{max-height:calc(100vh - 88px)}
-  .jm-cart-head{padding:18px 16px 15px}
-  .jm-cart-items{padding:0 16px 8px}
-  .jm-cart-item{grid-template-columns:68px minmax(0,1fr);gap:12px;padding:15px 0}
-  .jm-cart-thumb{width:68px;height:82px}
-  .jm-cart-right{
-    grid-column:2;min-width:0;flex-direction:row;align-items:center;justify-content:space-between;
-    gap:8px;width:100%
+
+  /*
+   * BOLSA — ajuste exclusivamente responsive.
+   * El modal pasa a ser un contenedor vertical de altura disponible:
+   * cabecera + lista desplazable + footer siempre visible.
+   * Esto evita que el footer quede cortado en teléfonos pequeños.
+   */
+  #modal-overlay:has(.modal.jm-cart-modal){
+    padding:0;
+    overflow:hidden;
   }
-  .jm-cart-line{font-size:.92rem}
-  .jm-cart-summary{padding:16px}
-  .jm-cart-summary-total{font-size:1.7rem}
-  .jm-cart-footer{padding:0 16px 16px;flex-direction:column}
+
+  .modal.jm-cart-modal{
+    width:100%;
+    max-width:none;
+    height:100dvh;
+    max-height:100dvh;
+    min-height:0;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  .modal.jm-cart-modal .modal-body{
+    flex:1 1 auto;
+    min-height:0;
+    max-height:none;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    padding:0;
+  }
+
+  .modal.jm-cart-modal .modal-footer{
+    display:block;
+    flex:0 0 auto;
+    min-width:0;
+    width:100%;
+  }
+
+  .jm-cart{
+    flex:1 1 auto;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .jm-cart-head{
+    flex:0 0 auto;
+    padding:18px 16px 15px;
+    min-width:0;
+  }
+
+  .jm-cart-head > div:first-child{
+    min-width:0;
+  }
+
+  .jm-cart-kicker,
+  .jm-cart-subtitle{
+    overflow-wrap:anywhere;
+  }
+
+  .jm-cart-items{
+    flex:1 1 auto;
+    min-height:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    padding:0 16px 8px;
+  }
+
+  .jm-cart-item{
+    grid-template-columns:68px minmax(0,1fr);
+    gap:12px;
+    padding:15px 0;
+    min-width:0;
+  }
+
+  .jm-cart-thumb{
+    width:68px;
+    height:82px;
+    min-width:0;
+  }
+
+  .jm-cart-info{
+    min-width:0;
+    max-width:100%;
+  }
+
+  .jm-cart-brand,
+  .jm-cart-name,
+  .jm-cart-meta,
+  .jm-cart-unit{
+    max-width:100%;
+    overflow-wrap:anywhere;
+  }
+
+  .jm-cart-right{
+    grid-column:2;
+    min-width:0;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    width:100%;
+    max-width:100%;
+  }
+
+  .jm-cart-line{
+    font-size:.92rem;
+    min-width:0;
+    white-space:nowrap;
+  }
+
+  .jm-cart-qty{
+    flex:0 0 auto;
+    max-width:100%;
+  }
+
+  .jm-cart-remove{
+    flex:0 0 auto;
+  }
+
+  .jm-cart-summary{
+    min-width:0;
+    width:100%;
+    padding:16px;
+    gap:10px;
+  }
+
+  .jm-cart-summary-label{
+    min-width:0;
+  }
+
+  .jm-cart-summary-total{
+    min-width:0;
+    font-size:1.7rem;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  .jm-cart-footer{
+    width:100%;
+    min-width:0;
+    padding:12px 16px max(16px, env(safe-area-inset-bottom));
+    flex-direction:column;
+  }
+
+  .jm-cart-footer .btn{
+    width:100%;
+    min-width:0;
+    flex:0 0 auto;
+  }
 }
+
+@media(max-width:359px){
+  /* Ajuste mínimo para 320/360 px: no cambia el diseño, solo reduce espacios. */
+  .jm-cart-head{padding-left:12px;padding-right:12px}
+  .jm-cart-items{padding-left:12px;padding-right:12px}
+  .jm-cart-summary{padding-left:12px;padding-right:12px}
+  .jm-cart-footer{padding-left:12px;padding-right:12px}
+  .jm-cart-item{grid-template-columns:62px minmax(0,1fr);gap:10px}
+  .jm-cart-thumb{width:62px;height:76px}
+  .jm-cart-summary{gap:10px}
+  .jm-cart-summary-total{font-size:1.55rem}
+}
+/* Bolsa: footer siempre visible en desktop, tablet y móvil; solo la lista de productos hace scroll. */
+@media (min-width:601px){
+  .modal.jm-cart-modal{
+    display:flex;
+    flex-direction:column;
+    height:min(92vh,900px);
+    max-height:min(92vh,900px);
+    min-height:0;
+  }
+  .modal.jm-cart-modal .modal-body{
+    flex:1 1 auto;
+    min-height:0;
+    max-height:none;
+    overflow:hidden;
+  }
+  .modal.jm-cart-modal .modal-body > .jm-cart{
+    flex:1 1 auto;
+    min-height:0;
+  }
+  .modal.jm-cart-modal .jm-cart-items{
+    min-height:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+  .modal.jm-cart-modal .modal-footer{
+    flex:0 0 auto;
+    width:100%;
+  }
+  .modal.jm-cart-modal .jm-cart-summary{
+    width:100%;
+    box-sizing:border-box;
+  }
+  .modal.jm-cart-modal .jm-cart-footer{
+    width:100%;
+    box-sizing:border-box;
+  }
+}
+
 @media(min-width:1400px){
   #public-catalog .pc-header-inner,#public-catalog .pc-hero,#public-catalog .pc-search-bar,#public-catalog .pc-body{max-width:1500px}
 }
@@ -1728,10 +1920,6 @@ body.catalog-mode #wholesale-catalog{display:none!important}
     </div>
   </div>
   <div class="pc-body" id="pc-body"></div>
-  <a class="pc-wa-fab" href="https://wa.me/18496539085?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20perfumes" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
-    <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20.5l1.6-4.8A8 8 0 1 1 21 12z"/></svg>
-    <span class="pc-wa-dot"></span>
-  </a>
   <div class="pc-footer">J&amp;M Aromas · Catálogo actualizado en tiempo real</div>
 </div>
 
@@ -8420,7 +8608,6 @@ const PublicCatalog = {
             ${p.marca ? `<div class="jm-cart-brand">${U.esc(p.marca)}</div>` : ''}
             <div class="jm-cart-name">${U.esc(p.nombre)}</div>
             ${p.presentacion || p.concentracion ? `<div class="jm-cart-meta">${p.presentacion ? U.esc(p.presentacion) : ''}${p.presentacion && p.concentracion ? ' · ' : ''}${p.concentracion ? U.esc(p.concentracion) : ''}</div>` : ''}
-            <div class="jm-cart-unit">${U.fmt.money(price)} c/u</div>
           </div>
           <div class="jm-cart-right">
             <strong class="jm-cart-line">${U.fmt.money(subtotal)}</strong>
@@ -8446,7 +8633,7 @@ const PublicCatalog = {
         <div class="jm-cart-head">
           <div>
             <div class="jm-cart-kicker">Tu bolsa</div>
-            <div class="jm-cart-subtitle">${itemCount} ${itemCount === 1 ? 'producto' : 'productos'} · ${this.isWholesale() ? 'Catálogo mayorista' : 'Catálogo público'}</div>
+            <div class="jm-cart-subtitle">Revisa tu selección de perfumes</div>
           </div>
           <button type="button" class="jm-cart-close" onclick="App.closeModal()" aria-label="Cerrar">×</button>
         </div>
@@ -8459,8 +8646,7 @@ const PublicCatalog = {
         <strong class="jm-cart-summary-total">${U.fmt.money(subtotal)}</strong>
       </div>
       <div class="jm-cart-footer">
-        <button type="button" class="btn btn-secondary" onclick="App.closeModal()">Seguir viendo</button>
-        <button type="button" class="btn jm-cart-whatsapp" onclick="PublicCatalog.pedirWhatsApp()">💬 Pedir pedido</button>
+        <button type="button" class="btn jm-cart-whatsapp" onclick="PublicCatalog.pedirWhatsApp()">Pedir pedido</button>
       </div>`;
 
     App.openModal('', body, footer, 'jm-cart-modal');
